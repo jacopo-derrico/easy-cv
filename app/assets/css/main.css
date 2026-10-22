@@ -597,8 +597,11 @@ input[type="color"] {
   display: grid;
   grid-template-columns: 1fr 1fr;
   column-gap: 28px;
+  row-gap: 18px;
   align-items: start;
 }
+
+.layout-split .cv-section + .cv-section { margin-top: 0; }
 
 .cv-head,
 .cv-main { min-width: 0; }

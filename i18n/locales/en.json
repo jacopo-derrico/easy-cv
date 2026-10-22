@@ -11,7 +11,7 @@
     "themeLight": "Light"
   },
   "export": {
-    "csv": "CSV",
+    "json": "JSON",
     "print": "Print / PDF",
     "drive": "Drive",
     "import": "Import",
@@ -30,7 +30,7 @@
     "fail": "Could not save to Drive."
   },
   "status": {
-    "csv": "CSV downloaded.",
+    "json": "JSON downloaded.",
     "imported": "CV opened.",
     "importFail": "That file is not a valid CV.",
     "reset": "Copy cleared.",
@@ -105,19 +105,5 @@
     "emptyName": "Your name",
     "emptyRole": "Professional role",
     "hint": "Filled sections show up here."
-  },
-  "csv": {
-    "section": "section",
-    "format": "format",
-    "title": "title",
-    "subtitle": "subtitle",
-    "start": "start",
-    "end": "end",
-    "location": "location",
-    "description": "description",
-    "email": "email",
-    "phone": "phone",
-    "website": "website",
-    "profile": "profile"
   }
 }

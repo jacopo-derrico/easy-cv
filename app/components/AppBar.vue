@@ -38,7 +38,7 @@
     <div class="bar-actions">
       <button type="button" class="btn" @click="onReset">{{ t('export.reset') }}</button>
       <button type="button" class="btn" @click="fileInput?.click()">{{ t('export.import') }}</button>
-      <button type="button" class="btn primary" @click="onCsv">{{ t('export.csv') }}</button>
+      <button type="button" class="btn primary" @click="onJson">{{ t('export.json') }}</button>
       <button type="button" class="btn" @click="onPrint">{{ t('export.print') }}</button>
       <button type="button" class="btn" @click="save">{{ t('export.drive') }}</button>
     </div>
@@ -47,15 +47,13 @@
 </template>
 
 <script setup lang="ts">
-import { fileSlug } from '~/utils/document'
-import { toCsv } from '~/utils/csv'
+import { fileSlug, pack } from '~/utils/document'
 import { downloadText } from '~/utils/download'
 
 const cv = useCvStore()
 const { t, locale, setLocale } = useI18n()
 const { dark, toggle } = useTheme()
 const { show } = useStatus()
-const { sectionTitle } = useSectionTitle()
 const { save } = useDrive()
 const fileInput = ref<HTMLInputElement | null>(null)
 
@@ -106,23 +104,10 @@ function onImport(event: Event) {
   reader.readAsText(file)
 }
 
-function onCsv() {
-  const header = [
-    t('csv.section'),
-    t('csv.format'),
-    t('csv.title'),
-    t('csv.subtitle'),
-    t('csv.start'),
-    t('csv.end'),
-    t('csv.location'),
-    t('csv.description'),
-    t('csv.email'),
-    t('csv.phone'),
-    t('csv.website'),
-  ]
-  const content = toCsv(cv.doc, header, t('csv.profile'), sectionTitle)
-  downloadText(`${fileSlug(cv.doc.profile.fullName)}.csv`, `\uFEFF${content}`, 'text/csv;charset=utf-8')
-  show(t('status.csv'))
+function onJson() {
+  const content = JSON.stringify(pack(cv.doc), null, 2)
+  downloadText(`${fileSlug(cv.doc.profile.fullName)}.json`, content, 'application/json')
+  show(t('status.json'))
 }
 
 function onPrint() {

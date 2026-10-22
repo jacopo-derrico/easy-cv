@@ -1,0 +1,116 @@
+{
+  "app": {
+    "description": "Create and customize your CV in the browser. No account, no database.",
+    "tagline": "In the browser, no account."
+  },
+  "nav": {
+    "edit": "Edit",
+    "preview": "Preview",
+    "lang": "Language",
+    "themeDark": "Dark",
+    "themeLight": "Light"
+  },
+  "export": {
+    "csv": "CSV",
+    "print": "Print / PDF",
+    "drive": "Drive",
+    "import": "Import",
+    "reset": "New"
+  },
+  "drive": {
+    "missing": "Drive needs NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web client, drive.file scope).",
+    "ok": "Saved to Google Drive.",
+    "fail": "Could not save to Drive."
+  },
+  "status": {
+    "csv": "CSV downloaded.",
+    "imported": "CV opened.",
+    "importFail": "That file is not a valid CV.",
+    "reset": "CV cleared.",
+    "storage": "Browser storage is full: remove the photo or shorten the text.",
+    "photo": "That image could not be used."
+  },
+  "confirm": {
+    "reset": "Clear the CV stored in this browser?",
+    "import": "Replace the current CV with this file?",
+    "delete": "Delete this section?"
+  },
+  "design": {
+    "layout": "Layout",
+    "accent": "Color",
+    "font": "Font",
+    "paper": "Paper",
+    "editorial": "Editorial",
+    "classic": "Classic",
+    "split": "Split",
+    "serif": "Serif",
+    "sans": "Sans",
+    "mono": "Mono",
+    "white": "White",
+    "cream": "Cream",
+    "ink": "Ink"
+  },
+  "profile": {
+    "title": "About",
+    "name": "Name",
+    "role": "Role",
+    "email": "Email",
+    "phone": "Phone",
+    "location": "Location",
+    "website": "Website",
+    "summary": "Summary",
+    "photo": "Photo",
+    "photoRemove": "Remove photo"
+  },
+  "sections": {
+    "title": "Sections",
+    "lead": "Rename, reorder, or add your own.",
+    "add": "Add",
+    "name": "Section name",
+    "format": "Format",
+    "experience": "Experience",
+    "education": "Education",
+    "skills": "Skills",
+    "languages": "Languages",
+    "projects": "Projects",
+    "untitled": "Section",
+    "entries": "Entries",
+    "tags": "Tags",
+    "text": "Text",
+    "hide": "Hide",
+    "show": "Show",
+    "delete": "Delete",
+    "up": "Up",
+    "down": "Down"
+  },
+  "entry": {
+    "add": "Add entry",
+    "remove": "Remove",
+    "title": "Title",
+    "subtitle": "Subtitle",
+    "start": "Start",
+    "end": "End",
+    "location": "Location",
+    "description": "Description",
+    "tag": "New tag"
+  },
+  "preview": {
+    "emptyName": "Your name",
+    "emptyRole": "Professional role",
+    "hint": "Filled sections show up here."
+  },
+  "csv": {
+    "section": "section",
+    "format": "format",
+    "title": "title",
+    "subtitle": "subtitle",
+    "start": "start",
+    "end": "end",
+    "location": "location",
+    "description": "description",
+    "email": "email",
+    "phone": "phone",
+    "website": "website",
+    "profile": "profile"
+  }
+}

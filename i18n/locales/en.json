@@ -17,6 +17,13 @@
     "import": "Import",
     "reset": "New"
   },
+  "copies": {
+    "label": "Copy",
+    "empty": "Copy {n}",
+    "named": "{n}. {name}",
+    "count": "{n} of 3 CVs",
+    "add": "New CV"
+  },
   "drive": {
     "missing": "Drive needs NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web client, drive.file scope).",
     "ok": "Saved to Google Drive.",
@@ -26,12 +33,12 @@
     "csv": "CSV downloaded.",
     "imported": "CV opened.",
     "importFail": "That file is not a valid CV.",
-    "reset": "CV cleared.",
+    "reset": "Copy cleared.",
     "storage": "Browser storage is full: remove the photo or shorten the text.",
     "photo": "That image could not be used."
   },
   "confirm": {
-    "reset": "Clear the CV stored in this browser?",
+    "reset": "Clear the open copy? The others stay.",
     "import": "Replace the current CV with this file?",
     "delete": "Delete this section?"
   },

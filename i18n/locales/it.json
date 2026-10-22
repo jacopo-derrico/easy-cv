@@ -17,6 +17,13 @@
     "import": "Importa",
     "reset": "Nuovo"
   },
+  "copies": {
+    "label": "Copia",
+    "empty": "Copia {n}",
+    "named": "{n}. {name}",
+    "count": "{n} di 3 CV",
+    "add": "Nuovo CV"
+  },
   "drive": {
     "missing": "Per Drive aggiungi NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web, scope drive.file).",
     "ok": "Salvato su Google Drive.",
@@ -26,12 +33,12 @@
     "csv": "CSV scaricato.",
     "imported": "CV aperto.",
     "importFail": "File non valido.",
-    "reset": "CV azzerato.",
+    "reset": "Copia azzerata.",
     "storage": "Memoria del browser piena: togli la foto o accorcia i testi.",
     "photo": "Immagine non valida."
   },
   "confirm": {
-    "reset": "Azzerare il CV in questo browser?",
+    "reset": "Azzerare la copia aperta? Le altre restano.",
     "import": "Sostituire il CV attuale con questo file?",
     "delete": "Eliminare questa sezione?"
   },

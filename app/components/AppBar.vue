@@ -25,6 +25,16 @@
       </svg>
       <span class="thumb" />
     </button>
+    <p class="copy-count">{{ t('copies.count', { n: cv.createdIndexes.length }) }}</p>
+    <label class="copy">
+      <span class="sr-only">{{ t('copies.label') }}</span>
+      <select :value="String(cv.active)" @change="onCopy">
+        <option v-for="index in cv.createdIndexes" :key="index" :value="String(index)">
+          {{ copyLabel(index) }}
+        </option>
+        <option v-if="cv.createdIndexes.length < 3" value="new">{{ t('copies.add') }}</option>
+      </select>
+    </label>
     <div class="bar-actions">
       <button type="button" class="btn" @click="onReset">{{ t('export.reset') }}</button>
       <button type="button" class="btn" @click="fileInput?.click()">{{ t('export.import') }}</button>
@@ -52,6 +62,19 @@ const fileInput = ref<HTMLInputElement | null>(null)
 function onLocale(event: Event) {
   const value = (event.target as HTMLSelectElement).value
   if (value === 'it' || value === 'en') setLocale(value)
+}
+
+function copyLabel(index: number) {
+  const name = cv.slotName(index)
+  return name
+    ? t('copies.named', { n: index + 1, name })
+    : t('copies.empty', { n: index + 1 })
+}
+
+function onCopy(event: Event) {
+  const value = (event.target as HTMLSelectElement).value
+  if (value === 'new') cv.createSlot()
+  else cv.openSlot(Number(value))
 }
 
 function onReset() {

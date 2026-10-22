@@ -142,6 +142,16 @@ button:disabled { opacity: 0.38; cursor: not-allowed; }
   background-size: 10px 7px;
 }
 
+.copy select { max-width: 11rem; }
+
+.copy-count {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
 html.dark .bar select {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23b3a596' stroke-width='1.6' stroke-linecap='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
 }

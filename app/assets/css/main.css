@@ -127,6 +127,63 @@ button:disabled { opacity: 0.38; cursor: not-allowed; }
 
 .btn.danger { color: var(--danger); }
 
+.bar select {
+  border: 1px solid var(--line);
+  background-color: transparent;
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 6px 30px 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%236d655c' stroke-width='1.6' stroke-linecap='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px 7px;
+}
+
+html.dark .bar select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23b3a596' stroke-width='1.6' stroke-linecap='round' d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+}
+
+.theme-toggle {
+  position: relative;
+  width: 58px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+.theme-toggle svg {
+  position: relative;
+  z-index: 1;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+}
+
+.theme-toggle .thumb {
+  position: absolute;
+  z-index: 0;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--ink);
+  transition: transform 0.18s ease;
+}
+
+.theme-toggle.on .thumb { transform: translateX(28px); }
+.theme-toggle:not(.on) svg:first-of-type,
+.theme-toggle.on svg:last-of-type { color: var(--panel); }
+
 .seg {
   display: inline-flex;
   border: 1px solid var(--line);

@@ -35,7 +35,7 @@ export default defineNuxtConfig({
   site: {
     url: 'http://localhost:3000',
     name: 'easy cv',
-    description: 'Crea e personalizza il tuo CV nel browser. Nessun account.',
+    description: 'Editor di curriculum gratuito nel browser: layout, colori, foto e sezioni a scelta. I dati restano sul dispositivo. Esporta in JSON o stampa in PDF.',
   },
   i18n: {
     locales: [

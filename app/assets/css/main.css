@@ -32,7 +32,7 @@ html.dark {
 
 html,
 body,
-#__nuxt { height: 100%; }
+#__nuxt { min-height: 100%; }
 
 body {
   margin: 0;
@@ -91,6 +91,11 @@ button:disabled { opacity: 0.38; cursor: not-allowed; }
   font-size: 13px;
   letter-spacing: 0.16em;
   font-weight: 700;
+}
+
+a.logo {
+  color: inherit;
+  text-decoration: none;
 }
 
 .bar {
@@ -701,6 +706,96 @@ input[type="color"] {
   border-radius: 999px;
   padding: 2px 9px;
   font-size: 12.5px;
+}
+
+.home { background: var(--bg); }
+.home .bar,
+.home main {
+  width: min(64rem, calc(100% - 64px));
+  margin-inline: auto;
+}
+
+.home .bar {
+  padding: 28px 0 0;
+  background: transparent;
+  border-bottom: 0;
+}
+
+.home-tools { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; }
+
+.home main {
+  padding: 12vh 0 14vh;
+}
+
+.hero h1 {
+  margin: 14px 0 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(46px, 8vw, 72px);
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+
+.home .kicker {
+  margin: 0;
+  color: var(--accent);
+}
+
+.home .lede {
+  margin: 22px 0 0;
+  max-width: 48rem;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.hero .btn {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 11px 18px;
+  text-decoration: none;
+}
+
+.home section + section { margin-top: 64px; }
+
+.home h2 {
+  margin: 0;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.03em;
+}
+
+.home section p {
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+.home ul {
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home li {
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  line-height: 1.45;
+}
+
+.home h3 {
+  margin: 22px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.home h3 + p { margin-top: 6px; color: var(--muted); }
+
+.home-end { margin-top: 8px; }
+.home-end a {
+  color: var(--accent);
+  font-weight: 600;
+  text-underline-offset: 3px;
 }
 
 .sr-only {

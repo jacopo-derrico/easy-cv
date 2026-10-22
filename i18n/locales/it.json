@@ -3,6 +3,35 @@
     "description": "Crea e personalizza il tuo CV nel browser. Nessun account, nessun database.",
     "tagline": "Nel browser, senza account."
   },
+  "home": {
+    "metaTitle": "Crea il CV nel browser — easy cv",
+    "metaDescription": "Editor di curriculum gratuito nel browser: layout, colori, foto e sezioni a scelta. I dati restano sul dispositivo. Esporta in JSON o stampa in PDF.",
+    "kicker": "Curriculum, senza account",
+    "title": "Crea il tuo CV nel browser.",
+    "lede": "Scrivi, impagina e stampa il curriculum da qui. Nessun account e nessun database: il documento resta nella memoria di questo browser.",
+    "cta": "Apri l'editor",
+    "howTitle": "Come funziona",
+    "how": "easy cv è un editor di curriculum vitae che funziona nel browser. Inserisci nome, esperienze, studi e competenze. Scegli tra i layout editoriale, classico e diviso, poi regola colore, carattere e carta. L'anteprima mostra il foglio A4. Da lì stampi in PDF oppure scarichi un file JSON da riaprire più tardi, anche su un altro computer.",
+    "customTitle": "Cosa si personalizza",
+    "pointLayout": "Tre layout: editoriale, classico e diviso.",
+    "pointLook": "Colore, carattere, carta e foto profilo.",
+    "pointSections": "Sezioni libere, da rinominare, spostare o nascondere.",
+    "pointCopies": "Fino a tre copie diverse, salvate in questo browser.",
+    "privacyTitle": "Dove finiscono i dati",
+    "privacy": "Non c'è un account e il curriculum non viene inviato a un server di easy cv. Testo e foto restano in locale. Il JSON serve a spostare il CV o a tenerne una copia. Il caricamento su Google Drive è facoltativo e parte solo se è configurato un client OAuth.",
+    "faqTitle": "Domande frequenti",
+    "faqFreeQ": "È gratuito?",
+    "faqFreeA": "Sì. L'editor è gratuito e non mostra pubblicità.",
+    "faqPdfQ": "Posso scaricare un PDF?",
+    "faqPdfA": "Sì. Il tasto Stampa / PDF apre la finestra di stampa del browser: da lì si salva in PDF, formato A4.",
+    "faqLangQ": "In quali lingue è disponibile?",
+    "faqLangA": "L'interfaccia è in italiano e in inglese. I testi del curriculum li scrivi tu, nella lingua che ti serve.",
+    "faqCopiesQ": "Quanti CV posso tenere?",
+    "faqCopiesA": "Tre copie nel browser, ciascuna con il proprio contenuto. Puoi azzerare solo quella aperta."
+  },
+  "editor": {
+    "metaTitle": "Editor — easy cv"
+  },
   "nav": {
     "edit": "Modifica",
     "preview": "Anteprima",

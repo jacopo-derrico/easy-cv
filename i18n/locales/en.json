@@ -3,6 +3,35 @@
     "description": "Create and customize your CV in the browser. No account, no database.",
     "tagline": "In the browser, no account."
   },
+  "home": {
+    "metaTitle": "Create your CV in the browser — easy cv",
+    "metaDescription": "A free CV editor in the browser: layouts, colors, a photo, and your own sections. Data stays on the device. Export JSON or print a PDF.",
+    "kicker": "A CV, with no account",
+    "title": "Create your CV in the browser.",
+    "lede": "Write, lay out, and print a CV from this page. No account and no database: the document stays in this browser.",
+    "cta": "Open the editor",
+    "howTitle": "How it works",
+    "how": "easy cv is a CV editor that runs in the browser. Add your name, experience, education, and skills. Pick an editorial, classic, or split layout, then set the color, type, and paper. The preview shows an A4 page. From there, print a PDF or download a JSON file you can open again later, including on another computer.",
+    "customTitle": "What you can change",
+    "pointLayout": "Three layouts: editorial, classic, and split.",
+    "pointLook": "Color, type, paper, and a profile photo.",
+    "pointSections": "Your own sections, which you can rename, move, or hide.",
+    "pointCopies": "Up to three different copies, saved in this browser.",
+    "privacyTitle": "Where the data goes",
+    "privacy": "There is no account, and the CV is not sent to an easy cv server. Text and photo stay local. JSON is how you move the CV or keep a copy. Upload to Google Drive is optional and runs only when an OAuth client is configured.",
+    "faqTitle": "Questions",
+    "faqFreeQ": "Is it free?",
+    "faqFreeA": "Yes. The editor is free and shows no ads.",
+    "faqPdfQ": "Can I download a PDF?",
+    "faqPdfA": "Yes. Print / PDF opens the browser print dialog, where you save an A4 PDF.",
+    "faqLangQ": "Which languages are supported?",
+    "faqLangA": "The interface is in Italian and English. You write the CV itself in whatever language you need.",
+    "faqCopiesQ": "How many CVs can I keep?",
+    "faqCopiesA": "Three copies in the browser, each with its own content. Clearing one leaves the others in place."
+  },
+  "editor": {
+    "metaTitle": "Editor — easy cv"
+  },
   "nav": {
     "edit": "Edit",
     "preview": "Preview",

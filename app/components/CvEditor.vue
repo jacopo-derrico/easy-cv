@@ -98,14 +98,18 @@
             <input v-model="cv.doc.profile.phone" type="tel" autocomplete="tel">
           </label>
         </div>
+        <label class="field">
+          <span>{{ t('profile.location') }}</span>
+          <input v-model="cv.doc.profile.location" autocomplete="address-level2">
+        </label>
         <div class="grid-2">
           <label class="field">
-            <span>{{ t('profile.location') }}</span>
-            <input v-model="cv.doc.profile.location" autocomplete="address-level2">
+            <span>{{ t('profile.website') }}</span>
+            <input v-model="cv.doc.profile.website" autocomplete="off">
           </label>
           <label class="field">
-            <span>{{ t('profile.website') }}</span>
-            <input v-model="cv.doc.profile.website" type="url" autocomplete="url">
+            <span>{{ t('profile.websiteUrl') }}</span>
+            <input v-model="cv.doc.profile.websiteUrl" type="url" autocomplete="url" inputmode="url">
           </label>
         </div>
         <label class="field">
@@ -201,6 +205,10 @@
                 <label class="field">
                   <span>{{ t('entry.location') }}</span>
                   <input v-model="item.location">
+                </label>
+                <label class="field">
+                  <span>{{ t('entry.url') }}</span>
+                  <input v-model="item.url" type="url" inputmode="url" :placeholder="t('entry.urlPlaceholder')">
                 </label>
                 <label class="field">
                   <span>{{ t('entry.description') }}</span>

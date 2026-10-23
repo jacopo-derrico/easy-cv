@@ -12,6 +12,7 @@ export interface CvEntry {
   end: string
   location: string
   description: string
+  url: string
 }
 
 export interface CvSection {
@@ -31,6 +32,7 @@ export interface CvProfile {
   phone: string
   location: string
   website: string
+  websiteUrl: string
   summary: string
   photo: string
 }
@@ -66,6 +68,7 @@ export function emptyProfile(): CvProfile {
     phone: '',
     location: '',
     website: '',
+    websiteUrl: '',
     summary: '',
     photo: '',
   }
@@ -80,6 +83,7 @@ export function emptyEntry(title = ''): CvEntry {
     end: '',
     location: '',
     description: '',
+    url: '',
   }
 }
 
@@ -132,6 +136,7 @@ function readEntry(value: unknown): CvEntry | null {
     end: str(entry.end, 40),
     location: str(entry.location, 160),
     description: str(entry.description, 4000),
+    url: str(entry.url, 500),
   }
 }
 
@@ -180,6 +185,7 @@ function readProfile(value: unknown): CvProfile {
     phone: str(raw.phone, 60),
     location: str(raw.location, 160),
     website: str(raw.website, 200),
+    websiteUrl: str(raw.websiteUrl, 500),
     summary: str(raw.summary, 4000),
     photo: safePhoto(raw.photo),
   }
@@ -202,7 +208,7 @@ export function normalizeDocument(input: unknown): CvDocument | null {
 }
 
 export function entryHasContent(entry: CvEntry): boolean {
-  return [entry.title, entry.subtitle, entry.start, entry.end, entry.location, entry.description]
+  return [entry.title, entry.subtitle, entry.start, entry.end, entry.location, entry.description, entry.url]
     .some(value => value.trim())
 }
 
@@ -224,13 +230,24 @@ export function fileSlug(name: string): string {
   return slug || 'cv'
 }
 
-export function websiteHref(value: string): string {
-  if (/^https?:\/\//i.test(value)) return value
-  return `https://${value}`
+export function externalHref(value: string): string {
+  const trimmed = value.trim()
+  if (!trimmed) return ''
+  if (/^https?:\/\//i.test(trimmed)) return trimmed
+  if (/^mailto:/i.test(trimmed) || /^tel:/i.test(trimmed)) return trimmed
+  return `https://${trimmed}`
 }
 
-export function websiteLabel(value: string): string {
-  return value.replace(/^https?:\/\//i, '').replace(/\/$/, '')
+export function externalLabel(value: string): string {
+  return value.trim().replace(/^https?:\/\//i, '').replace(/\/$/, '')
+}
+
+export function profileWebsiteContact(profile: CvProfile): { label: string, href: string } | null {
+  const url = profile.websiteUrl.trim() || profile.website.trim()
+  if (!url) return null
+  const href = externalHref(profile.websiteUrl.trim() || profile.website)
+  const label = profile.website.trim() || externalLabel(profile.websiteUrl.trim() || profile.website)
+  return { label, href }
 }
 
 export function entryMeta(entry: CvEntry): string {

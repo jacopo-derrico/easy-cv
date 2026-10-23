@@ -10,7 +10,7 @@ function emptySlots(): (CvDocument | null)[] {
 function hasContent(document: CvDocument | null) {
   if (!document) return false
   const profile = document.profile
-  if ([profile.fullName, profile.role, profile.email, profile.phone, profile.location, profile.website, profile.summary, profile.photo].some(value => value.trim())) {
+  if ([profile.fullName, profile.role, profile.email, profile.phone, profile.location, profile.website, profile.websiteUrl, profile.summary, profile.photo].some(value => value.trim())) {
     return true
   }
   const design = document.design
@@ -22,7 +22,7 @@ function hasContent(document: CvDocument | null) {
     || section.label.trim().length > 0
     || section.body.trim().length > 0
     || section.items.some(item =>
-      [item.title, item.subtitle, item.start, item.end, item.location, item.description].some(value => value.trim()),
+      [item.title, item.subtitle, item.start, item.end, item.location, item.description, item.url].some(value => value.trim()),
     ),
   )
 }

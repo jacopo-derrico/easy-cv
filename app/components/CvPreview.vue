@@ -34,7 +34,10 @@
               </ul>
               <div v-else>
                 <article v-for="item in entries(section)" :key="item.id" class="cv-entry">
-                  <h3 v-if="item.title">{{ item.title }}</h3>
+                  <h3 v-if="item.title">
+                    <a v-if="entryHref(item.url)" :href="entryHref(item.url)">{{ item.title }}</a>
+                    <template v-else>{{ item.title }}</template>
+                  </h3>
                   <p v-if="item.subtitle" class="cv-sub">{{ item.subtitle }}</p>
                   <p v-if="entryMeta(item)" class="cv-meta">{{ entryMeta(item) }}</p>
                   <p v-if="item.description" class="cv-desc">{{ item.description }}</p>
@@ -49,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { entryHasContent, entryMeta, sectionHasContent, websiteHref, websiteLabel, type CvSection } from '~/utils/document'
+import { entryHasContent, entryMeta, externalHref, profileWebsiteContact, sectionHasContent, type CvSection } from '~/utils/document'
 
 const SHEET_WIDTH = 794
 
@@ -76,11 +79,15 @@ const contacts = computed(() => {
   if (profile.value.email) items.push({ label: profile.value.email, href: `mailto:${profile.value.email}` })
   if (profile.value.phone) items.push({ label: profile.value.phone, href: `tel:${profile.value.phone}` })
   if (profile.value.location) items.push({ label: profile.value.location })
-  if (profile.value.website) {
-    items.push({ label: websiteLabel(profile.value.website), href: websiteHref(profile.value.website) })
-  }
+  const site = profileWebsiteContact(profile.value)
+  if (site) items.push(site)
   return items
 })
+
+function entryHref(url: string) {
+  const href = externalHref(url)
+  return href || undefined
+}
 
 function tags(section: CvSection) {
   return section.items.filter(item => item.title.trim())

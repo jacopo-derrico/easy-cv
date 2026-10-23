@@ -93,7 +93,8 @@
     "email": "Email",
     "phone": "Phone",
     "location": "Location",
-    "website": "Website",
+    "website": "Link text",
+    "websiteUrl": "URL",
     "summary": "Summary",
     "photo": "Photo",
     "photoRemove": "Remove photo"
@@ -127,6 +128,8 @@
     "start": "Start",
     "end": "End",
     "location": "Location",
+    "url": "Title URL",
+    "urlPlaceholder": "https://…",
     "description": "Description",
     "tag": "New tag"
   },

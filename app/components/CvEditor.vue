@@ -120,6 +120,58 @@
     </section>
 
     <section class="panel">
+      <h2 class="kicker">{{ t('social.title') }}</h2>
+      <p class="lead">{{ t('social.lead') }}</p>
+      <div class="choice">
+        <span class="kicker">{{ t('social.size') }}</span>
+        <div class="seg">
+          <button
+            v-for="size in socialSizes"
+            :key="size"
+            type="button"
+            :aria-pressed="cv.doc.profile.socialIconSize === size"
+            @click="cv.doc.profile.socialIconSize = size"
+          >
+            {{ t(`social.size-${size}`) }}
+          </button>
+        </div>
+      </div>
+      <label class="field social-flag">
+        <input v-model="cv.doc.profile.socialShowLabels" type="checkbox">
+        <span>{{ t('social.showLabels') }}</span>
+      </label>
+      <article v-for="(link, index) in cv.doc.profile.socialLinks" :key="link.id" class="social-link">
+        <div class="social-link-bar">
+          <span class="kicker">{{ t('social.icon') }}</span>
+          <button type="button" class="btn danger" @click="removeSocial(index)">{{ t('social.remove') }}</button>
+        </div>
+        <div class="social-picks">
+          <button
+            v-for="icon in socialIcons"
+            :key="icon"
+            type="button"
+            class="social-pick"
+            :class="{ on: link.icon === icon }"
+            :aria-pressed="link.icon === icon"
+            :aria-label="t(`social.icons.${icon}`)"
+            @click="link.icon = icon"
+          >
+            <SocialIcon :icon="icon" :size="16" />
+          </button>
+        </div>
+        <label class="field">
+          <span>{{ t('social.label') }}</span>
+          <input v-model="link.label" :placeholder="t('social.labelPlaceholder')">
+        </label>
+        <label class="field">
+          <span>{{ t('social.url') }}</span>
+          <input v-model="link.url" type="url" inputmode="url" :placeholder="t('entry.urlPlaceholder')">
+        </label>
+      </article>
+      <button type="button" class="btn add-entry" @click="addSocial">{{ t('social.add') }}</button>
+    </section>
+
+    <section class="panel">
       <h2 class="kicker">{{ t('sections.title') }}</h2>
       <p class="lead">{{ t('sections.lead') }}</p>
       <div v-for="(section, index) in cv.doc.sections" :key="section.id" class="section" :class="{ 'is-off': !section.visible }">
@@ -235,6 +287,7 @@
 <script setup lang="ts">
 import { emptyEntry, type CvSection, type SectionFormat } from '~/utils/document'
 import { readPhoto } from '~/utils/photo'
+import { emptySocialLink, SOCIAL_ICONS, type SocialIconSize } from '~/utils/social'
 
 const cv = useCvStore()
 const { t } = useI18n()
@@ -246,6 +299,8 @@ const fonts = ['serif', 'sans', 'mono'] as const
 const papers = ['white', 'cream', 'ink'] as const
 const formats = ['entries', 'tags', 'text'] as const
 const swatches = ['#b4531a', '#1f6f5b', '#1e4d8c', '#7c3f2a', '#3f3a34']
+const socialIcons = SOCIAL_ICONS
+const socialSizes: SocialIconSize[] = ['s', 'm', 'l']
 
 const openId = ref('')
 const newLabel = ref('')
@@ -286,6 +341,14 @@ function commitTag(section: CvSection) {
   const exists = section.items.some(item => item.title.toLocaleLowerCase() === title.toLocaleLowerCase())
   if (!exists) section.items.push(emptyEntry(title))
   drafts[section.id] = ''
+}
+
+function addSocial() {
+  cv.doc.profile.socialLinks.push(emptySocialLink())
+}
+
+function removeSocial(index: number) {
+  cv.doc.profile.socialLinks.splice(index, 1)
 }
 
 async function onPhoto(event: Event) {

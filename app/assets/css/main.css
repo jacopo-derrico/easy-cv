@@ -654,6 +654,151 @@ input[type="color"] {
 
 .cv-contacts li { overflow-wrap: anywhere; }
 
+.cv-social {
+  --cv-social-icon-size: 22px;
+  --cv-social-pad: 7px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 14px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-social.size-s {
+  --cv-social-icon-size: 14px;
+  --cv-social-pad: 5px;
+}
+
+.cv-social.size-m {
+  --cv-social-icon-size: 22px;
+  --cv-social-pad: 7px;
+}
+
+.cv-social.size-l {
+  --cv-social-icon-size: 28px;
+  --cv-social-pad: 10px;
+}
+
+.cv-social .social-icon-glyph {
+  display: block;
+  width: var(--cv-social-icon-size);
+  height: var(--cv-social-icon-size);
+}
+
+.cv-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  box-sizing: border-box;
+  min-width: calc(var(--cv-social-icon-size) + 2 * var(--cv-social-pad));
+  min-height: calc(var(--cv-social-icon-size) + 2 * var(--cv-social-pad));
+  padding: var(--cv-social-pad);
+  border-radius: 999px;
+  color: var(--cv-accent);
+  background: color-mix(in srgb, var(--cv-accent) 12%, transparent);
+}
+
+.cv-social.with-labels a {
+  width: auto;
+  min-width: 0;
+  padding: calc(var(--cv-social-pad) - 1px) 12px calc(var(--cv-social-pad) - 1px) calc(var(--cv-social-pad) - 1px);
+}
+
+.cv-social-label {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+}
+
+.cv-social.size-s .cv-social-label { font-size: 10px; }
+.cv-social.size-m .cv-social-label { font-size: 12px; }
+.cv-social.size-l .cv-social-label { font-size: 14px; }
+
+.field.social-flag {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.field.social-flag input {
+  width: auto;
+  margin: 3px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  flex: 0 0 auto;
+  accent-color: var(--accent);
+}
+
+.field.social-flag span {
+  flex: 1;
+  min-width: 0;
+}
+
+.layout-classic .cv-social,
+.layout-split .cv-social {
+  justify-content: flex-start;
+  margin-top: 12px;
+}
+
+.layout-classic .cv-social { justify-content: center; }
+
+.social-link {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.social-link-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.social-link-bar .kicker { margin: 0; }
+
+.social-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.social-pick {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+}
+
+.social-pick .social-icon-glyph {
+  width: 16px;
+  height: 16px;
+}
+
+.social-pick.on {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
 .cv-summary,
 .cv-desc { white-space: pre-wrap; overflow-wrap: anywhere; }
 
@@ -862,6 +1007,7 @@ input[type="color"] {
   }
   .placeholder { display: none !important; }
   .sheet a[href] { text-decoration: underline; text-underline-offset: 2px; }
+  .cv-social a { background: transparent; }
 }
 
 @page { size: A4; margin: 10mm; }

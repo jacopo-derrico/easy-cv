@@ -86,6 +86,33 @@
     "cream": "Crema",
     "ink": "Inchiostro"
   },
+  "social": {
+    "title": "Social",
+    "lead": "Icone cliccabili in anteprima e nel PDF.",
+    "size": "Dimensione icone",
+    "size-s": "S",
+    "size-m": "M",
+    "size-l": "L",
+    "showLabels": "Mostra il nome accanto all’icona (consigliato in stampa, se il PDF non è cliccabile)",
+    "label": "Nome o utente",
+    "labelPlaceholder": "es. mario.rossi",
+    "add": "Aggiungi link",
+    "remove": "Rimuovi",
+    "icon": "Icona",
+    "url": "URL",
+    "icons": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "x": "X",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "mastodon": "Mastodon",
+      "telegram": "Telegram",
+      "tiktok": "TikTok",
+      "link": "Link"
+    }
+  },
   "profile": {
     "title": "Chi sei",
     "name": "Nome",

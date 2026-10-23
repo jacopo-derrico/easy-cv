@@ -86,6 +86,33 @@
     "cream": "Cream",
     "ink": "Ink"
   },
+  "social": {
+    "title": "Social",
+    "lead": "Clickable icons in the preview and PDF.",
+    "size": "Icon size",
+    "sizeS": "S",
+    "sizeM": "M",
+    "sizeL": "L",
+    "showLabels": "Show a name beside each icon (helpful in print when the PDF is not clickable)",
+    "label": "Name or handle",
+    "labelPlaceholder": "e.g. jane.doe",
+    "add": "Add link",
+    "remove": "Remove",
+    "icon": "Icon",
+    "url": "URL",
+    "icons": {
+      "linkedin": "LinkedIn",
+      "github": "GitHub",
+      "x": "X",
+      "instagram": "Instagram",
+      "facebook": "Facebook",
+      "youtube": "YouTube",
+      "mastodon": "Mastodon",
+      "telegram": "Telegram",
+      "tiktok": "TikTok",
+      "link": "Link"
+    }
+  },
   "profile": {
     "title": "About",
     "name": "Name",

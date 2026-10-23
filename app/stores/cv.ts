@@ -10,7 +10,10 @@ function emptySlots(): (CvDocument | null)[] {
 function hasContent(document: CvDocument | null) {
   if (!document) return false
   const profile = document.profile
-  if ([profile.fullName, profile.role, profile.email, profile.phone, profile.location, profile.website, profile.websiteUrl, profile.summary, profile.photo].some(value => value.trim())) {
+  if ([profile.fullName, profile.role, profile.email, profile.phone, profile.location, profile.website, profile.websiteUrl, profile.summary, profile.photo].some(value => value.trim())
+    || profile.socialLinks.some(link => link.url.trim() || link.label.trim())
+    || profile.socialShowLabels
+    || profile.socialIconSize !== 'm') {
     return true
   }
   const design = document.design

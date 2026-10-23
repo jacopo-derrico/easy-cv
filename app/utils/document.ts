@@ -1,3 +1,5 @@
+import { defaultSocialPrefs, readSocialLink, readSocialPrefs, type CvSocialLink, type SocialIconSize } from '~/utils/social'
+
 export type LayoutId = 'editorial' | 'classic' | 'split'
 export type FontId = 'serif' | 'sans' | 'mono'
 export type PaperId = 'white' | 'cream' | 'ink'
@@ -35,6 +37,9 @@ export interface CvProfile {
   websiteUrl: string
   summary: string
   photo: string
+  socialLinks: CvSocialLink[]
+  socialIconSize: SocialIconSize
+  socialShowLabels: boolean
 }
 
 export interface CvDesign {
@@ -71,6 +76,9 @@ export function emptyProfile(): CvProfile {
     websiteUrl: '',
     summary: '',
     photo: '',
+    socialLinks: [],
+    socialIconSize: defaultSocialPrefs().iconSize,
+    socialShowLabels: defaultSocialPrefs().showLabels,
   }
 }
 
@@ -178,6 +186,7 @@ function readDesign(value: unknown): CvDesign {
 
 function readProfile(value: unknown): CvProfile {
   const raw = value as Record<string, unknown>
+  const social = readSocialPrefs(raw)
   return {
     fullName: str(raw.fullName, 160),
     role: str(raw.role, 160),
@@ -188,6 +197,11 @@ function readProfile(value: unknown): CvProfile {
     websiteUrl: str(raw.websiteUrl, 500),
     summary: str(raw.summary, 4000),
     photo: safePhoto(raw.photo),
+    socialLinks: Array.isArray(raw.socialLinks)
+      ? raw.socialLinks.map(readSocialLink).filter((item): item is CvSocialLink => item !== null)
+      : [],
+    socialIconSize: social.iconSize,
+    socialShowLabels: social.showLabels,
   }
 }
 

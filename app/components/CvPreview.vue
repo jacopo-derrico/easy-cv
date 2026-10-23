@@ -20,6 +20,24 @@
                 <template v-else>{{ contact.label }}</template>
               </li>
             </ul>
+            <ul
+              v-if="socialLinks.length"
+              class="cv-social"
+              :class="[`size-${profile.socialIconSize || 'm'}`, { 'with-labels': profile.socialShowLabels }]"
+            >
+              <li v-for="link in socialLinks" :key="link.id">
+                <a
+                  :href="externalHref(link.url)"
+                  :aria-label="socialAria(link)"
+                >
+                  <SocialIcon :icon="link.icon" />
+                  <span
+                    v-if="profile.socialShowLabels && link.label.trim()"
+                    class="cv-social-label"
+                  >{{ link.label }}</span>
+                </a>
+              </li>
+            </ul>
           </div>
         </header>
         <div class="cv-main">
@@ -53,6 +71,7 @@
 
 <script setup lang="ts">
 import { entryHasContent, entryMeta, externalHref, profileWebsiteContact, sectionHasContent, type CvSection } from '~/utils/document'
+import { socialLinksWithUrl } from '~/utils/social'
 
 const SHEET_WIDTH = 794
 
@@ -83,6 +102,13 @@ const contacts = computed(() => {
   if (site) items.push(site)
   return items
 })
+
+const socialLinks = computed(() => socialLinksWithUrl(profile.value.socialLinks))
+
+function socialAria(link: { icon: string, label: string, url: string }) {
+  const name = link.label.trim() || t(`social.icons.${link.icon}`)
+  return profile.value.socialShowLabels && link.label.trim() ? name : t(`social.icons.${link.icon}`)
+}
 
 function entryHref(url: string) {
   const href = externalHref(url)

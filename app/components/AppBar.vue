@@ -3,19 +3,53 @@
     <NuxtLink to="/" class="logo"><span>easy</span><b>cv</b></NuxtLink>
     <LocaleTheme />
     <p class="copy-count">{{ t('copies.count', { n: cv.createdIndexes.length }) }}</p>
-    <label class="copy">
+    <label v-if="cv.createdIndexes.length > 1" class="copy">
       <span class="sr-only">{{ t('copies.label') }}</span>
       <select :value="String(cv.active)" @change="onCopy">
         <option v-for="index in cv.createdIndexes" :key="index" :value="String(index)">
           {{ copyLabel(index) }}
         </option>
-        <option v-if="cv.createdIndexes.length < 3" value="new">{{ t('copies.add') }}</option>
       </select>
     </label>
     <div class="bar-actions">
-      <button type="button" class="btn" @click="onReset">{{ t('export.reset') }}</button>
+      <button
+        type="button"
+        class="btn primary"
+        :disabled="cv.createdIndexes.length >= 3"
+        @click="onNew"
+      >
+        {{ t('export.new') }}
+      </button>
       <button type="button" class="btn" @click="fileInput?.click()">{{ t('export.import') }}</button>
-      <button type="button" class="btn primary" @click="onJson">{{ t('export.json') }}</button>
+      <div ref="jsonMenu" class="split-btn">
+        <button type="button" class="split-main" @click="onJsonCurrent">
+          {{ t('export.json') }}
+        </button>
+        <button
+          type="button"
+          class="split-toggle"
+          :aria-expanded="jsonOpen"
+          :aria-label="t('export.jsonMenu')"
+          @click="jsonOpen = !jsonOpen"
+        >
+          <svg viewBox="0 0 12 8" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </button>
+        <div v-if="jsonOpen" class="split-menu" role="menu">
+          <button type="button" role="menuitem" @click="onJsonCurrent">
+            {{ t('export.jsonCurrent') }}
+          </button>
+          <button
+            type="button"
+            role="menuitem"
+            :disabled="cv.createdIndexes.length < 2"
+            @click="onJsonAll"
+          >
+            {{ t('export.jsonAll') }}
+          </button>
+        </div>
+      </div>
       <button type="button" class="btn" @click="onPrint">{{ t('export.print') }}</button>
       <button type="button" class="btn" @click="save">{{ t('export.drive') }}</button>
     </div>
@@ -32,6 +66,8 @@ const { t } = useI18n()
 const { show } = useStatus()
 const { save } = useDrive()
 const fileInput = ref<HTMLInputElement | null>(null)
+const jsonMenu = ref<HTMLElement | null>(null)
+const jsonOpen = ref(false)
 
 function copyLabel(index: number) {
   const name = cv.slotName(index)
@@ -41,15 +77,14 @@ function copyLabel(index: number) {
 }
 
 function onCopy(event: Event) {
-  const value = (event.target as HTMLSelectElement).value
-  if (value === 'new') cv.createSlot()
-  else cv.openSlot(Number(value))
+  const value = Number((event.target as HTMLSelectElement).value)
+  cv.openSlot(value)
 }
 
-function onReset() {
-  if (!confirm(t('confirm.reset'))) return
-  cv.reset()
-  show(t('status.reset'))
+function onNew() {
+  if (cv.createdIndexes.length >= 3) return
+  cv.createSlot()
+  show(t('status.created'))
 }
 
 function onImport(event: Event) {
@@ -75,10 +110,23 @@ function onImport(event: Event) {
   reader.readAsText(file)
 }
 
-function onJson() {
+function closeJsonMenu() {
+  jsonOpen.value = false
+}
+
+function onJsonCurrent() {
   const content = JSON.stringify(pack(cv.doc), null, 2)
-  downloadText(`${fileSlug(cv.doc.profile.fullName)}.json`, content, 'application/json')
+  downloadText(`${fileSlug(cv.doc.profile.fullName)}-easy-cv.json`, content, 'application/json')
   show(t('status.json'))
+  closeJsonMenu()
+}
+
+function onJsonAll() {
+  if (cv.createdIndexes.length < 2) return
+  const content = JSON.stringify(cv.librarySnapshot(), null, 2)
+  downloadText('easy-cv-all.json', content, 'application/json')
+  show(t('status.jsonAll'))
+  closeJsonMenu()
 }
 
 function onPrint() {
@@ -90,4 +138,14 @@ function onPrint() {
   }, { once: true })
   window.print()
 }
+
+function onDocumentClick(event: MouseEvent) {
+  if (!jsonOpen.value) return
+  const target = event.target
+  if (target instanceof Node && jsonMenu.value?.contains(target)) return
+  closeJsonMenu()
+}
+
+onMounted(() => document.addEventListener('click', onDocumentClick))
+onBeforeUnmount(() => document.removeEventListener('click', onDocumentClick))
 </script>

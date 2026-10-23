@@ -27,7 +27,7 @@
     "faqLangQ": "Which languages are supported?",
     "faqLangA": "The interface is in Italian and English. You write the CV itself in whatever language you need.",
     "faqCopiesQ": "How many CVs can I keep?",
-    "faqCopiesA": "Three copies in the browser, each with its own content. Clearing one leaves the others in place."
+    "faqCopiesA": "Up to three CVs in the browser. Use the menu only to switch between them; New CV adds another."
   },
   "editor": {
     "metaTitle": "Editor — easy cv"
@@ -40,18 +40,20 @@
     "themeLight": "Light"
   },
   "export": {
-    "json": "JSON",
+    "json": "Export",
+    "jsonMenu": "JSON options",
+    "jsonCurrent": "Current CV",
+    "jsonAll": "All CVs",
     "print": "Print / PDF",
     "drive": "Drive",
     "import": "Import",
-    "reset": "New"
+    "new": "New CV"
   },
   "copies": {
     "label": "Copy",
     "empty": "Copy {n}",
     "named": "{n}. {name}",
-    "count": "{n} of 3 CVs",
-    "add": "New CV"
+    "count": "{n} of 3 CVs"
   },
   "drive": {
     "missing": "Drive needs NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web client, drive.file scope).",
@@ -60,14 +62,14 @@
   },
   "status": {
     "json": "JSON downloaded.",
+    "jsonAll": "All CVs downloaded.",
     "imported": "CV opened.",
     "importFail": "That file is not a valid CV.",
-    "reset": "Copy cleared.",
+    "created": "New CV created.",
     "storage": "Browser storage is full: remove the photo or shorten the text.",
     "photo": "That image could not be used."
   },
   "confirm": {
-    "reset": "Clear the open copy? The others stay.",
     "import": "Replace the current CV with this file?",
     "delete": "Delete this section?"
   },

@@ -27,7 +27,7 @@
     "faqLangQ": "In quali lingue è disponibile?",
     "faqLangA": "L'interfaccia è in italiano e in inglese. I testi del curriculum li scrivi tu, nella lingua che ti serve.",
     "faqCopiesQ": "Quanti CV posso tenere?",
-    "faqCopiesA": "Tre copie nel browser, ciascuna con il proprio contenuto. Puoi azzerare solo quella aperta."
+    "faqCopiesA": "Fino a tre CV nel browser. La tendina serve solo a passare da uno all’altro; «Nuovo CV» ne aggiunge uno."
   },
   "editor": {
     "metaTitle": "Editor — easy cv"
@@ -40,18 +40,20 @@
     "themeLight": "Chiaro"
   },
   "export": {
-    "json": "JSON",
+    "json": "Esporta",
+    "jsonMenu": "Opzioni JSON",
+    "jsonCurrent": "CV corrente",
+    "jsonAll": "Tutti i CV",
     "print": "Stampa / PDF",
     "drive": "Drive",
     "import": "Importa",
-    "reset": "Nuovo"
+    "new": "Nuovo CV"
   },
   "copies": {
     "label": "Copia",
     "empty": "Copia {n}",
     "named": "{n}. {name}",
-    "count": "{n} di 3 CV",
-    "add": "Nuovo CV"
+    "count": "{n} di 3 CV"
   },
   "drive": {
     "missing": "Per Drive aggiungi NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web, scope drive.file).",
@@ -60,14 +62,14 @@
   },
   "status": {
     "json": "JSON scaricato.",
+    "jsonAll": "Tutti i CV scaricati.",
     "imported": "CV aperto.",
     "importFail": "File non valido.",
-    "reset": "Copia azzerata.",
+    "created": "Nuovo CV creato.",
     "storage": "Memoria del browser piena: togli la foto o accorcia i testi.",
     "photo": "Immagine non valida."
   },
   "confirm": {
-    "reset": "Azzerare la copia aperta? Le altre restano.",
     "import": "Sostituire il CV attuale con questo file?",
     "delete": "Eliminare questa sezione?"
   },

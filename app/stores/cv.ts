@@ -177,6 +177,17 @@ export const useCvStore = defineStore('cv', () => {
     section.items.push(emptyEntry())
   }
 
+  function librarySnapshot() {
+    const copies = [...slots.value]
+    copies[active.value] = doc.value
+    return {
+      app: 'easy-cv' as const,
+      version: 2 as const,
+      active: active.value,
+      slots: copies,
+    }
+  }
+
   return {
     doc,
     active,
@@ -193,5 +204,6 @@ export const useCvStore = defineStore('cv', () => {
     removeSection,
     moveSection,
     addEntry,
+    librarySnapshot,
   }
 })

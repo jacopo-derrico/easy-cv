@@ -130,6 +130,7 @@ function onJsonAll() {
 }
 
 function onPrint() {
+  useEditorPane().value = 'preview'
   const name = cv.doc.profile.fullName.trim()
   const previous = document.title
   if (name) document.title = `${name} — CV`

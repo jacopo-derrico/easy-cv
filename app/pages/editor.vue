@@ -20,7 +20,7 @@
 
 <script setup lang="ts">
 const cv = useCvStore()
-const pane = ref<'edit' | 'preview'>('edit')
+const pane = useEditorPane()
 const { message, show } = useStatus()
 const { t } = useI18n()
 

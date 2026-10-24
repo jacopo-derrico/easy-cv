@@ -10,6 +10,7 @@
         <button type="button" :aria-pressed="pane === 'edit'" @click="pane = 'edit'">{{ t('nav.edit') }}</button>
         <button type="button" :aria-pressed="pane === 'preview'" @click="pane = 'preview'">{{ t('nav.preview') }}</button>
       </div>
+      <EditorStorageNotice />
       <main class="workspace" :data-pane="pane">
         <CvEditor />
         <CvPreview />

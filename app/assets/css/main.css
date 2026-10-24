@@ -371,6 +371,90 @@ html.dark .bar select {
   padding: 16px 14px 40px;
 }
 
+.editor-storage-notice {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 40;
+  width: min(17.5rem, calc(100% - 32px));
+  padding: 12px 36px 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--line) 70%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--panel) 72%, transparent);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--ink) 12%, transparent);
+  pointer-events: auto;
+}
+
+.editor-storage-notice-inner {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.editor-storage-notice-icon {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--danger);
+  background: color-mix(in srgb, var(--danger) 14%, transparent);
+}
+
+.editor-storage-notice-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.editor-storage-notice-copy {
+  min-width: 0;
+  flex: 1;
+}
+
+.editor-storage-notice-title {
+  margin: 0 0 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.editor-storage-notice-body {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+
+.editor-storage-notice-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.editor-storage-notice-close:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--ink) 10%, transparent);
+}
+
+.editor-storage-notice-close svg {
+  width: 12px;
+  height: 12px;
+}
+
 .pane-tabs { display: none; }
 
 .panel {

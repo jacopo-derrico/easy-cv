@@ -32,6 +32,11 @@
   "editor": {
     "metaTitle": "Editor — easy cv"
   },
+  "notice": {
+    "storageTitle": "Local storage",
+    "storageBody": "CVs stay only in this browser and can be lost. Export JSON or save to Google Drive to save what you have written.",
+    "close": "Dismiss notice"
+  },
   "nav": {
     "edit": "Edit",
     "preview": "Preview",

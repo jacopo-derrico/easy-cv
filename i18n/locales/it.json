@@ -41,12 +41,18 @@
   },
   "export": {
     "json": "Esporta",
-    "jsonMenu": "Opzioni JSON",
+    "jsonMenu": "Opzioni esportazione",
+    "local": "Locale",
     "jsonCurrent": "CV corrente",
     "jsonAll": "Tutti i CV",
+    "scopeTitle": "Cosa vuoi esportare?",
+    "cancel": "Annulla",
     "print": "Stampa / PDF",
     "drive": "Drive",
     "import": "Importa",
+    "importMenu": "Opzioni importazione",
+    "importJson": "File JSON",
+    "importDrive": "Google Drive",
     "new": "Nuovo CV"
   },
   "copies": {
@@ -57,8 +63,14 @@
   },
   "drive": {
     "missing": "Per Drive aggiungi NUXT_PUBLIC_GOOGLE_CLIENT_ID (OAuth Web, scope drive.file).",
+    "missingImport": "Per importare da Drive servono NUXT_PUBLIC_GOOGLE_CLIENT_ID e NUXT_PUBLIC_GOOGLE_API_KEY (Picker API).",
+    "missingAppId": "Aggiungi NUXT_PUBLIC_GOOGLE_APP_ID (numero progetto Google Cloud, non il Client ID).",
+    "importForbidden": "Impossibile leggere il file: scegilo di nuovo dal Picker o esportalo da easy cv.",
     "ok": "Salvato su Google Drive.",
-    "fail": "Salvataggio su Drive non riuscito."
+    "okAll": "Tutti i CV salvati su Google Drive.",
+    "fail": "Salvataggio su Drive non riuscito.",
+    "importFail": "Importazione da Drive non riuscita.",
+    "importCancelled": "Importazione da Drive annullata."
   },
   "status": {
     "json": "JSON scaricato.",

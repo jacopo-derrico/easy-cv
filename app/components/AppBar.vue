@@ -20,40 +20,64 @@
       >
         {{ t('export.new') }}
       </button>
-      <button type="button" class="btn" @click="fileInput?.click()">{{ t('export.import') }}</button>
-      <div ref="jsonMenu" class="split-btn">
-        <button type="button" class="split-main" @click="onJsonCurrent">
-          {{ t('export.json') }}
+      <div ref="importMenu" class="split-btn">
+        <button type="button" class="split-main" @click="onImportFile">
+          {{ t('export.import') }}
         </button>
         <button
           type="button"
           class="split-toggle"
-          :aria-expanded="jsonOpen"
-          :aria-label="t('export.jsonMenu')"
-          @click="jsonOpen = !jsonOpen"
+          :aria-expanded="importOpen"
+          :aria-label="t('export.importMenu')"
+          @click="importOpen = !importOpen"
         >
           <svg viewBox="0 0 12 8" aria-hidden="true">
             <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M1 1.5 6 6.5 11 1.5" />
           </svg>
         </button>
-        <div v-if="jsonOpen" class="split-menu" role="menu">
-          <button type="button" role="menuitem" @click="onJsonCurrent">
-            {{ t('export.jsonCurrent') }}
+        <div v-if="importOpen" class="split-menu" role="menu">
+          <button type="button" role="menuitem" @click="onImportFile">
+            {{ t('export.importJson') }}
           </button>
-          <button
-            type="button"
-            role="menuitem"
-            :disabled="cv.createdIndexes.length < 2"
-            @click="onJsonAll"
-          >
-            {{ t('export.jsonAll') }}
+          <button type="button" role="menuitem" @click="onImportDrive">
+            {{ t('export.importDrive') }}
+          </button>
+        </div>
+      </div>
+      <div ref="exportMenu" class="split-btn">
+        <button type="button" class="split-main" @click="beginExport('local')">
+          {{ t('export.json') }}
+        </button>
+        <button
+          type="button"
+          class="split-toggle"
+          :aria-expanded="exportOpen"
+          :aria-label="t('export.jsonMenu')"
+          @click="exportOpen = !exportOpen"
+        >
+          <svg viewBox="0 0 12 8" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M1 1.5 6 6.5 11 1.5" />
+          </svg>
+        </button>
+        <div v-if="exportOpen" class="split-menu" role="menu">
+          <button type="button" role="menuitem" @click="beginExport('local')">
+            {{ t('export.local') }}
+          </button>
+          <button type="button" role="menuitem" @click="beginExport('drive')">
+            {{ t('export.drive') }}
           </button>
         </div>
       </div>
       <button type="button" class="btn" @click="onPrint">{{ t('export.print') }}</button>
-      <button type="button" class="btn" @click="save">{{ t('export.drive') }}</button>
     </div>
-    <input ref="fileInput" class="sr-only" type="file" accept="application/json,.json" @change="onImport">
+    <ExportScopeModal
+      :open="exportModalOpen"
+      :title="t('export.scopeTitle')"
+      :allow-all="cv.createdIndexes.length >= 2"
+      @close="exportModalOpen = false"
+      @pick="onExportScope"
+    />
+    <input ref="fileInput" class="sr-only" type="file" accept="application/json,.json" @change="onImportFilePicked">
   </header>
 </template>
 
@@ -64,10 +88,14 @@ import { downloadText } from '~/utils/download'
 const cv = useCvStore()
 const { t } = useI18n()
 const { show } = useStatus()
-const { save } = useDrive()
+const { save, importFile } = useDrive()
 const fileInput = ref<HTMLInputElement | null>(null)
-const jsonMenu = ref<HTMLElement | null>(null)
-const jsonOpen = ref(false)
+const exportMenu = ref<HTMLElement | null>(null)
+const importMenu = ref<HTMLElement | null>(null)
+const exportOpen = ref(false)
+const importOpen = ref(false)
+const exportModalOpen = ref(false)
+const exportTarget = ref<'local' | 'drive'>('local')
 
 function copyLabel(index: number) {
   const name = cv.slotName(index)
@@ -87,7 +115,32 @@ function onNew() {
   show(t('status.created'))
 }
 
-function onImport(event: Event) {
+function closeMenus() {
+  exportOpen.value = false
+  importOpen.value = false
+}
+
+function beginExport(target: 'local' | 'drive') {
+  exportTarget.value = target
+  closeMenus()
+  exportModalOpen.value = true
+}
+
+function applyImport(data: unknown) {
+  if (!cv.replace(data)) {
+    show(t('status.importFail'))
+    return false
+  }
+  show(t('status.imported'))
+  return true
+}
+
+function onImportFile() {
+  closeMenus()
+  fileInput.value?.click()
+}
+
+function onImportFilePicked(event: Event) {
   const input = event.target as HTMLInputElement
   const file = input.files?.[0]
   input.value = ''
@@ -96,12 +149,7 @@ function onImport(event: Event) {
   const reader = new FileReader()
   reader.onload = () => {
     try {
-      const data = JSON.parse(String(reader.result))
-      if (!cv.replace(data)) {
-        show(t('status.importFail'))
-        return
-      }
-      show(t('status.imported'))
+      applyImport(JSON.parse(String(reader.result)))
     }
     catch {
       show(t('status.importFail'))
@@ -110,23 +158,31 @@ function onImport(event: Event) {
   reader.readAsText(file)
 }
 
-function closeJsonMenu() {
-  jsonOpen.value = false
+async function onImportDrive() {
+  closeMenus()
+  if (!confirm(t('confirm.import'))) return
+  const data = await importFile()
+  if (data === null) return
+  applyImport(data)
 }
 
-function onJsonCurrent() {
+function exportLocal(scope: 'current' | 'all') {
+  if (scope === 'all') {
+    if (cv.createdIndexes.length < 2) return
+    const content = JSON.stringify(cv.librarySnapshot(), null, 2)
+    downloadText('easy-cv-all.json', content, 'application/json')
+    show(t('status.jsonAll'))
+    return
+  }
   const content = JSON.stringify(pack(cv.doc), null, 2)
   downloadText(`${fileSlug(cv.doc.profile.fullName)}-easy-cv.json`, content, 'application/json')
   show(t('status.json'))
-  closeJsonMenu()
 }
 
-function onJsonAll() {
-  if (cv.createdIndexes.length < 2) return
-  const content = JSON.stringify(cv.librarySnapshot(), null, 2)
-  downloadText('easy-cv-all.json', content, 'application/json')
-  show(t('status.jsonAll'))
-  closeJsonMenu()
+async function onExportScope(scope: 'current' | 'all') {
+  exportModalOpen.value = false
+  if (exportTarget.value === 'drive') await save(scope)
+  else exportLocal(scope)
 }
 
 function onPrint() {
@@ -141,10 +197,10 @@ function onPrint() {
 }
 
 function onDocumentClick(event: MouseEvent) {
-  if (!jsonOpen.value) return
   const target = event.target
-  if (target instanceof Node && jsonMenu.value?.contains(target)) return
-  closeJsonMenu()
+  if (!(target instanceof Node)) return
+  if (exportOpen.value && !exportMenu.value?.contains(target)) exportOpen.value = false
+  if (importOpen.value && !importMenu.value?.contains(target)) importOpen.value = false
 }
 
 onMounted(() => document.addEventListener('click', onDocumentClick))

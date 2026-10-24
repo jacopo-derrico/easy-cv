@@ -137,10 +137,39 @@ export const useCvStore = defineStore('cv', () => {
     doc.value = defaultDocument()
   }
 
+  function applyLibrary(input: unknown) {
+    const library = readLibrary(input)
+    const hasSlot = library.slots.some(slot => slot && hasContent(slot))
+    if (!hasSlot) return false
+    active.value = library.active
+    slots.value = library.slots
+    const current = library.slots[library.active]
+    const fallback = library.slots.findIndex(slot => slot && hasContent(slot))
+    if (current && hasContent(current)) {
+      doc.value = current
+    }
+    else if (fallback >= 0) {
+      active.value = fallback
+      doc.value = library.slots[fallback] as CvDocument
+    }
+    else {
+      return false
+    }
+    if (ready.value) persist()
+    return true
+  }
+
   function replace(input: unknown) {
+    if (input && typeof input === 'object') {
+      const root = input as Record<string, unknown>
+      if (root.app === 'easy-cv' && Array.isArray(root.slots)) {
+        return applyLibrary(input)
+      }
+    }
     const parsed = normalizeDocument(input)
     if (!parsed) return false
     doc.value = parsed
+    if (ready.value) slots.value[active.value] = parsed
     return true
   }
 

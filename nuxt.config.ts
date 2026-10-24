@@ -3,11 +3,14 @@ export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-07-15',
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   runtimeConfig: {
     public: {
       // OAuth Client ID (Web). Scope: https://www.googleapis.com/auth/drive.file
       googleClientId: '',
+      googleApiKey: '',
+      // Numero progetto Google Cloud (non il Client ID OAuth) — richiesto dal Picker.
+      googleAppId: '',
     },
   },
   app: {

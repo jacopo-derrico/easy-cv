@@ -24,7 +24,9 @@ const pane = useEditorPane()
 const { message, show } = useStatus()
 const { t } = useI18n()
 
-onMounted(() => cv.hydrate())
+onMounted(() => {
+  void cv.hydrate()
+})
 
 watch(() => cv.storageError, (failed) => {
   if (failed) show(t('status.storage'))

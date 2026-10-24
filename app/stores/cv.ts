@@ -1,6 +1,7 @@
 import { defaultDocument, emptyEntry, normalizeDocument, uid, type CvDocument, type SectionFormat } from '~/utils/document'
 
 const STORAGE_KEY = 'easy-cv'
+const DEFAULT_CV_URL = '/default-cv.json'
 const SLOT_COUNT = 3
 
 function emptySlots(): (CvDocument | null)[] {
@@ -74,22 +75,36 @@ export const useCvStore = defineStore('cv', () => {
     }))
   }
 
-  function hydrate() {
+  function adoptLibrary(library: ReturnType<typeof readLibrary>) {
+    active.value = library.active
+    slots.value = library.slots
+    const current = library.slots[library.active]
+    const fallback = library.slots.findIndex(slot => hasContent(slot))
+    if (current && (hasContent(current) || fallback < 0)) {
+      doc.value = current
+      return
+    }
+    if (fallback >= 0) {
+      active.value = fallback
+      doc.value = library.slots[fallback] as CvDocument
+    }
+  }
+
+  async function loadDefaultCv() {
+    const response = await fetch(DEFAULT_CV_URL)
+    if (!response.ok) return
+    const data = await response.json()
+    adoptLibrary(readLibrary(data))
+  }
+
+  async function hydrate() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY)
       if (raw) {
-        const library = readLibrary(JSON.parse(raw))
-        active.value = library.active
-        slots.value = library.slots
-        const current = library.slots[library.active]
-        const fallback = library.slots.findIndex(slot => hasContent(slot))
-        if (current && (hasContent(current) || fallback < 0)) {
-          doc.value = current
-        }
-        else if (fallback >= 0) {
-          active.value = fallback
-          doc.value = library.slots[fallback] as CvDocument
-        }
+        adoptLibrary(readLibrary(JSON.parse(raw)))
+      }
+      else {
+        await loadDefaultCv()
       }
     }
     catch {
@@ -141,20 +156,7 @@ export const useCvStore = defineStore('cv', () => {
     const library = readLibrary(input)
     const hasSlot = library.slots.some(slot => slot && hasContent(slot))
     if (!hasSlot) return false
-    active.value = library.active
-    slots.value = library.slots
-    const current = library.slots[library.active]
-    const fallback = library.slots.findIndex(slot => slot && hasContent(slot))
-    if (current && hasContent(current)) {
-      doc.value = current
-    }
-    else if (fallback >= 0) {
-      active.value = fallback
-      doc.value = library.slots[fallback] as CvDocument
-    }
-    else {
-      return false
-    }
+    adoptLibrary(library)
     if (ready.value) persist()
     return true
   }

@@ -1,7 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@pinia/nuxt', '@nuxtjs/i18n', '@nuxtjs/seo'],
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
   runtimeConfig: {
@@ -11,20 +11,18 @@ export default defineNuxtConfig({
       googleApiKey: '',
       // Numero progetto Google Cloud (non il Client ID OAuth) — richiesto dal Picker.
       googleAppId: '',
+      kofiUrl: 'https://ko-fi.com/K1S52AAFQQ',
+      // ca-pub-… e lo slot dell’unità. Vuoti: il footer non carica AdSense.
+      adsenseClient: '',
+      adsenseSlot: '',
     },
   },
   app: {
     head: {
-      title: 'easy cv',
+      title: 'Easy-CV',
       titleTemplate: '%s',
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
-        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
-        {
-          rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Source+Serif+4:ital,wght@0,400;0,600;1,400&display=swap',
-        },
       ],
       script: [
         {
@@ -36,8 +34,8 @@ export default defineNuxtConfig({
     },
   },
   site: {
-    url: 'http://localhost:3000',
-    name: 'easy cv',
+    url: 'https://easy-cv.app',
+    name: 'Easy-CV',
     description: 'Editor di curriculum gratuito nel browser: layout, colori, foto e sezioni a scelta. I dati restano sul dispositivo. Esporta in JSON o stampa in PDF.',
   },
   i18n: {

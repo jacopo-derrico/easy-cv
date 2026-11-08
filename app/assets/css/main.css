@@ -59,6 +59,7 @@ button:disabled { opacity: 0.38; cursor: not-allowed; }
 ::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
 
 .app {
+  --chrome-footer: 56px;
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -374,7 +375,7 @@ html.dark .bar select {
 .editor-storage-notice {
   position: fixed;
   right: 16px;
-  bottom: 16px;
+  bottom: calc(16px + var(--chrome-footer, 0px));
   z-index: 40;
   width: min(17.5rem, calc(100% - 32px));
   padding: 12px 36px 12px 14px;
@@ -1157,6 +1158,52 @@ input[type="color"] {
   text-underline-offset: 3px;
 }
 
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.support-kofi {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.support-kofi a {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.support-kofi img { vertical-align: middle; }
+
+.home .site-footer {
+  margin-top: 64px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.app .site-footer {
+  flex: none;
+  padding: 8px 14px;
+  border-top: 1px solid var(--line);
+  background: var(--panel);
+}
+
+.ad-slot {
+  display: block;
+  width: min(728px, 100%);
+  height: 90px;
+  margin-inline: auto;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -1170,6 +1217,8 @@ input[type="color"] {
 }
 
 @media (max-width: 900px) {
+  .app { --chrome-footer: 88px; }
+
   .pane-tabs {
     display: grid;
     grid-template-columns: 1fr 1fr;

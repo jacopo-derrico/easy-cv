@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <div v-if="!cv.ready" class="boot">
-      <p class="logo"><span>easy</span><b>cv</b></p>
+      <p class="logo"><span>Easy</span><b>-CV</b></p>
     </div>
     <template v-else>
       <AppBar />
@@ -16,6 +16,7 @@
         <CvPreview />
       </main>
     </template>
+    <SiteFooter />
   </div>
 </template>
 

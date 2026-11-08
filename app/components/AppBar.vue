@@ -1,6 +1,6 @@
 <template>
   <header class="bar no-print">
-    <NuxtLink to="/" class="logo"><span>easy</span><b>cv</b></NuxtLink>
+    <NuxtLink to="/" class="logo"><span>Easy</span><b>-CV</b></NuxtLink>
     <LocaleTheme />
     <p class="copy-count">{{ t('copies.count', { n: cv.createdIndexes.length }) }}</p>
     <label v-if="cv.createdIndexes.length > 1" class="copy">

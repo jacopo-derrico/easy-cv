@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <header class="bar">
-      <p class="logo"><span>easy</span><b>cv</b></p>
+      <p class="logo"><span>Easy</span><b>-CV</b></p>
       <span class="home-tools">
         <LocaleTheme />
       </span>
@@ -37,6 +37,8 @@
           <p>{{ t('home.faqFreeA') }}</p>
           <h3>{{ t('home.faqPdfQ') }}</h3>
           <p>{{ t('home.faqPdfA') }}</p>
+          <h3>{{ t('home.faqDataQ') }}</h3>
+          <p>{{ t('home.faqDataA') }}</p>
           <h3>{{ t('home.faqLangQ') }}</h3>
           <p>{{ t('home.faqLangA') }}</p>
           <h3>{{ t('home.faqCopiesQ') }}</h3>
@@ -46,6 +48,7 @@
           <NuxtLink to="/editor">{{ t('home.cta') }}</NuxtLink>
         </p>
       </section>
+      <SiteFooter />
     </main>
   </div>
 </template>

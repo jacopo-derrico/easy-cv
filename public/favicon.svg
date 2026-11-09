@@ -1,4 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="8" fill="#1c1916"/>
-  <text x="16" y="21" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#f3ece3">cv</text>
+  <text x="16" y="15" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="14" fill="#f3ece3">easy</text>
+  <text x="16" y="24" text-anchor="middle" font-family="system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="0.4" fill="#e08a45">CV</text>
 </svg>
